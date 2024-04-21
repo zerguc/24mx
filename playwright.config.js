@@ -13,7 +13,7 @@ export default defineConfig({
     },
     screenshot: "only-on-failure",
     ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
     // hasTouch: true,
     // trace: "on",
   },
