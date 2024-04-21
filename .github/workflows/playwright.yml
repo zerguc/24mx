@@ -37,7 +37,7 @@ on:
         description: "Token"
         type: string
 env:
-  HOME: "playwright"
+  HOME: "24mx"
 jobs:
   ui_automation_tests:
     runs-on: [ubuntu-latest]
