@@ -36,17 +36,17 @@ export default defineConfig({
     //   },
     //   dependencies: ["setup"],
     // },
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-      // dependencies: ["setup"],
-    },
     // {
-    //   name: "Google Chrome",
-    //   use: { ...devices["Desktop Chrome"], channel: "chrome" },
-    //   dependencies: ["setup"], // or 'chrome-beta'
+    //   name: "webkit",
+    //   use: {
+    //     ...devices["Desktop Safari"],
+    //   },
+    //   // dependencies: ["setup"],
     // },
+    {
+      name: "Google Chrome",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+      // dependencies: ["setup"], // or 'chrome-beta'
+    },
   ],
 });
