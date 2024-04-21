@@ -48,6 +48,7 @@ jobs:
       - name: Install dependencies
 
         run: |
+          ls
           cd ${{ env.PATH }}
           npm install moment
           npm install events
