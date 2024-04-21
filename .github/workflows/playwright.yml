@@ -53,8 +53,8 @@ jobs:
           npm install moment
           npm install events
           npx playwright --version
-      - name: Install Playwright Browsers
-        run: npx playwright install chrome
+      #   - name: Install Playwright Browsers
+      #      run: npx playwright install chrome
       - name: Run Playwright tests
         env:
           #spaces after ":" -> "var: secret"
