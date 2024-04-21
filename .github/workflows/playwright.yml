@@ -49,7 +49,7 @@ jobs:
 
         run: |
           ls
-          cd ${{ env.PATH }}
+
           npm install moment
           npm install events
           npx playwright --version
