@@ -63,8 +63,9 @@ jobs:
           numberOfRetries: ${{ inputs.retriesNumber }}
           testDescribeMode: ${{ inputs.testDescribeMode }}
         run: |
-          cd ${{ env.PATH }}
           ls
+          cd ${{ env.HOME }}
+
           npx playwright test ${{inputs.testFileRelativePath}}
       - uses: actions/upload-artifact@v3
         if: always()
