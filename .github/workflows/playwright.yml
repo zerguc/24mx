@@ -64,6 +64,7 @@ jobs:
           testDescribeMode: ${{ inputs.testDescribeMode }}
         run: |
           cd ${{ env.PATH }}
+          ls
           npx playwright test ${{inputs.testFileRelativePath}}
       - uses: actions/upload-artifact@v3
         if: always()
