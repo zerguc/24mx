@@ -40,7 +40,7 @@ env:
   HOME: "playwright"
 jobs:
   ui_automation_tests:
-    runs-on: [self-hosted, solinas]
+    runs-on: [ubuntu-latest]
     container:
       image: mcr.microsoft.com/playwright:v1.42.1-jammy
     steps:
