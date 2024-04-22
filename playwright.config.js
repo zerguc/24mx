@@ -22,13 +22,13 @@ export default defineConfig({
   projects: [
     // { name: "setup", testMatch: /.*\.setup\.js/ },
 
-    // {
-    //   name: "chromium",
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //   },
-    //   dependencies: ["setup"],
-    // },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+      // dependencies: ["setup"],
+    },
     // {
     //   name: "firefox",
     //   use: {
@@ -43,10 +43,10 @@ export default defineConfig({
     //   },
     //   // dependencies: ["setup"],
     // },
-    {
-      name: "Google Chrome",
-      use: { ...devices["Desktop Chrome"], channel: "chrome" },
-      // dependencies: ["setup"], // or 'chrome-beta'
-    },
+    // {
+    //   name: "Google Chrome",
+    //   use: { ...devices["Desktop Chrome"], channel: "chrome" },
+    //   // dependencies: ["setup"], // or 'chrome-beta'
+    // },
   ],
 });
