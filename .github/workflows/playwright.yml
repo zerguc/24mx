@@ -25,7 +25,13 @@ on:
       testFileRelativePath:
         description: "Specify Test File Relative Path"
         type: string
-        required: true
+        required: false
+      testFolderRelativePath:
+        description: "Specify Test File Relative Path"
+        type: choice
+        options:
+          - "./tests/ui"
+          - "./tests/api"
       testDescribeMode:
         description: "Specify Parallelization for the test file(s)"
         type: choice
@@ -33,16 +39,13 @@ on:
         options:
           - "serial"
           - "parallel"
-      prmTokenTry:
-        description: "Token"
-        type: string
 env:
   HOME: "24mx"
 jobs:
   ui_automation_tests:
     runs-on: [ubuntu-latest]
     container:
-      image: mcr.microsoft.com/playwright:v1.42.1-jammy
+      image: mcr.microsoft.com/playwright:v1.43.0-jammy
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
@@ -64,7 +67,11 @@ jobs:
           testDescribeMode: ${{ inputs.testDescribeMode }}
         run: |
           ls
-          npx playwright test ${{inputs.testFileRelativePath}}
+          testPath=${{ inputs.testFileRelativePath }}
+          if [ -z "$testPath" ]; then
+            testPath=${{ inputs.testFolderRelativePath }}
+          fi
+          npx playwright test $testPath
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -72,5 +79,4 @@ jobs:
           path: |
             ./playwright-report/
             ./playwright-report/**
-            ./tests/runData.js
           retention-days: 1

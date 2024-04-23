@@ -1,44 +1,41 @@
 import { expect } from '@playwright/test';
 class Service {
-    async waitForResponseOnPage(
+    async navigateToPageWithResponse(
         page,
-        data,
+        navigationLink,
         responseUrlInclude,
         applicationName,
-        waitForObjectName,
         responseStatus
     ) {
         console.log(
-            data,
+            navigationLink,
             " :",
-            " on ",
+            " on Network of application: ",
             applicationName,
             " waiting for ",
-            waitForObjectName
+            responseUrlInclude
         );
-        let response = page.waitForResponse(
+        const responseForWait = page.waitForResponse(
             (resp) =>
                 resp.url().includes(responseUrlInclude) && resp.status() === responseStatus,
             { timeout: 45000 }
         );
-        return await response;
+        await page.goto(navigationLink);
+        let response = await responseForWait;
+        return response;
     }
     async waitForDigitsInElement(locator) {
         const startTime = Date.now();
         const timeout = 5000;
-
         while (true) {
             const element = locator;
             const textContent = await element.innerText();
-
             if (this.containsDigits(textContent)) {
                 return textContent;
             }
-
             if (Date.now() - startTime >= timeout) {
                 throw new Error("Timeout exceeded while waiting for element to contain digits");
             }
-
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
@@ -48,11 +45,10 @@ class Service {
     }
     async validateSearchRequest(page, requestUrlIncludes, productType) {
         let searchRequest_response = await this.waitForResponseOnPage(page, "search_request", requestUrlIncludes, productType, productType, 200);
-        let searchRequest_requestBody = JSON.parse(searchRequest_response.request().postData());// console.log(searchRequest_requestBody);
+        let searchRequest_requestBody = JSON.parse(searchRequest_response.request().postData());
         // Validate query string
         let searchQueryString = searchRequest_requestBody.QueryString;
         expect(searchQueryString).toEqual(productType.toLowerCase());
     }
 }
-
 export const service = new Service();
