@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/test.js';
+import { test, expect } from '../../fixtures/test.js';
 /* 
 As most API calls are not permitted without authentication
 just playing with status codes and responses.
