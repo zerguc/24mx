@@ -22,6 +22,8 @@ test('UI: Product Order', async ({ page }) => {
     productData.price = (await page.locator('.qa-product-price').innerText()).substring(3);
     await page.click('.o-productpage__add-to-cart .qa-pdp-product-variants');
     await page.click('//div[@class="m-select__items-wrapper"]//li[1]');
+    let productSizePrice = (await page.locator('//div[@class="m-select__items-wrapper"]//li[1]//div[@class="a-product-variation__price-current"]').innerText());
+    productData.price = (productData.price != productSizePrice) ? productSizePrice : productData.price;
     await page.click('//div[contains(text(),"Wysyłka i zwroty")]');
     await expect(page.locator('//p[contains(text(),"' + deliveryTerm + '")]')).toBeAttached();
     await page.click('.qa-pdp-add-to-cart-btn');
