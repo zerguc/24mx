@@ -26,7 +26,7 @@ test('UI: Product Order', async ({ page }) => {
     let productSizePriceVisibility = await productSizePrice.isVisible({ timeout: 1000 });
     if (productSizePriceVisibility) {
         let productSizePriceValue = (await productSizePrice.innerText());
-        productData.price = (productData.price != productSizePriceValue) ? productSizePrice : productData.price;
+        productData.price = (productData.price != productSizePriceValue) ? productSizePriceValue : productData.price;
     }
     await page.click('//div[contains(text(),"Wysyłka i zwroty")]');
     await expect(page.locator('//p[contains(text(),"' + deliveryTerm + '")]')).toBeAttached();
